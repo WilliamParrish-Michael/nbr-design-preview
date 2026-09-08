@@ -1,0 +1,25 @@
+{
+  "name": "nbr-design-preview",
+  "version": "1.0.0",
+  "description": "A premium redesign concept for New Beginnings Recovery, combining the design language from the prompt-chain exploration (\"First Light\") with the treatment-center design audit (Desert-dawn palette, phone-first conversion, cinematic hero, serif display, sticky mobile call bar, square CTAs) — using the real logo and facility photography.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WilliamParrish-Michael/nbr-design-preview.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/WilliamParrish-Michael/nbr-design-preview/issues"
+  },
+  "homepage": "https://github.com/WilliamParrish-Michael/nbr-design-preview#readme",
+  "dependencies": {
+    "marked": "^18.0.12",
+    "node-html-parser": "^9.0.4"
+  }
+}

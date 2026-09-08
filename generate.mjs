@@ -2,6 +2,11 @@
 // (ported from the Astro rebuild). Run: node generate.mjs
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
+import { marked } from 'marked';
+import { parse as parseHTML } from 'node-html-parser';
+
+const SRC = 'C:/Users/mchlw/Desktop/newbeginnings-recovery';
+const fmtDate = s => { try { return new Date(s + 'T00:00:00Z').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }); } catch (e) { return s; } };
 
 const B = '/nbr-design-preview/';               // GitHub Pages base path
 const PHONE = '(760) 762-3605', TEL = 'tel:+17607623605';
@@ -18,8 +23,8 @@ const NAV = [
   ['wellness', 'Wellness', 'wellness.html'],
   ['family', 'Family', 'family.html'],
   ['virtual-tour', 'Virtual Tour', 'virtual-tour.html'],
+  ['blog', 'Blog', 'blog.html'],
   ['resources', 'Resources', 'resources.html'],
-  ['contact', 'Contact', 'contact.html'],
 ];
 
 const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
@@ -47,7 +52,9 @@ const FOOTER = `<footer><div class="wrap">
       <p style="color:#8B8474">DHCS License #330232AP · Exp. 07/31/2027</p>
     </div>
     <div><h4>Explore</h4>
-      <a href="${B}about.html">About</a><a href="${B}programs.html">Programs</a><a href="${B}wellness.html">Wellness</a><a href="${B}family.html">Family</a><a href="${B}virtual-tour.html">Virtual Tour</a><a href="${B}resources.html">Resources</a><a href="${B}contact.html">Contact</a></div>
+      <a href="${B}about.html">About</a><a href="${B}programs.html">Programs</a><a href="${B}wellness.html">Wellness</a><a href="${B}family.html">Family</a><a href="${B}virtual-tour.html">Virtual Tour</a><a href="${B}blog.html">Blog</a><a href="${B}resources.html">Resources</a><a href="${B}contact.html">Contact</a></div>
+    <div><h4>Legal</h4>
+      <a href="${B}privacy-policy.html">Privacy Policy</a><a href="${B}notice-of-privacy-practices.html">Notice of Privacy Practices</a><a href="${B}consumer-health-data.html">Consumer Health Data</a><a href="${B}privacy-choices.html">Your Privacy Choices</a><a href="${B}non-discrimination-notice.html">Nondiscrimination</a><a href="${B}accessibility.html">Accessibility</a><a href="${B}terms.html">Terms of Use</a></div>
     <div><h4>Compare</h4>
       <a href="${B}design-audit.html">Design audit</a><a href="${B}first-light.html">Original concept</a><a href="https://williamparrish-michael.github.io/newbeginnings-recovery/">Rebuild (Astro)</a></div>
   </div>
@@ -393,6 +400,65 @@ ${pageHero({ eyebrow: 'Insurance', title: 'Find out if your insurance covers tre
   <p style="margin-top:1.6rem"><a class="btn btn-primary" href="${TEL}">${svgPhone}Call ${PHONE} to verify</a></p>
 </div></section>
 ` });
+
+// ============================ BLOG ============================
+const blogDir = path.join(SRC, 'src/content/blog');
+const mdFiles = (await fs.readdir(blogDir)).filter(f => f.endsWith('.md'));
+const posts = [];
+for (const f of mdFiles) {
+  const raw = await fs.readFile(path.join(blogDir, f), 'utf8');
+  const m = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
+  if (!m) continue;
+  const fm = {};
+  m[1].split(/\r?\n/).forEach(line => { const i = line.indexOf(':'); if (i > 0) { fm[line.slice(0, i).trim()] = line.slice(i + 1).trim().replace(/^["']|["']$/g, ''); } });
+  if (fm.draft === 'true') continue;
+  const slug = f.replace(/\.md$/, '');
+  let body = marked.parse(m[2]);
+  body = body.replace(/(["'(])\/images\//g, `$1${B}images/`);
+  posts.push({ slug, title: fm.title || slug, description: fm.description || '', pubDate: fm.pubDate || '', hero: fm.heroImage ? B + fm.heroImage.replace(/^\//, '') : '', body });
+}
+posts.sort((a, b) => (a.pubDate < b.pubDate ? 1 : -1));
+
+pages['blog.html'] = shell({ active: 'blog', title: 'Blog — New Beginnings Recovery', desc: 'Practical, compassionate guidance on detox, treatment, insurance, and supporting a loved one — from New Beginnings Recovery in Rancho Mirage.', main: `
+${pageHero({ eyebrow: 'Blog', title: 'Guidance for recovery &amp; families', lede: 'Practical, compassionate articles on detox, treatment, insurance, and supporting the people you love.' })}
+<section class="section"><div class="wrap"><div class="blog-grid">
+${posts.map(p => `<a class="blog-card reveal" href="${B}blog/${p.slug}.html">${p.hero ? `<img src="${p.hero}" alt="" loading="lazy" />` : ''}<div class="bc-body"><time>${fmtDate(p.pubDate)}</time><h3>${esc(p.title)}</h3><p>${esc(p.description).slice(0, 140)}…</p></div></a>`).join('')}
+</div></div></section>` });
+
+for (const p of posts) {
+  pages[`blog/${p.slug}.html`] = shell({ active: 'blog', title: `${p.title} — New Beginnings Recovery`, desc: p.description.slice(0, 155), main: `
+<header class="page-hero"><div class="wrap"><span class="eyebrow reveal">Blog</span><h1 class="reveal">${esc(p.title)}</h1><p class="lede reveal">${fmtDate(p.pubDate)}</p></div></header>
+${p.hero ? `<div class="wrap" style="margin-top:2rem"><img class="post-hero" src="${p.hero}" alt="" /></div>` : ''}
+<article class="section"><div class="wrap"><div class="prose post-body">${p.body}</div></div></article>
+${ctaBand()}` });
+}
+
+// ============================ LEGAL ============================
+const distDir = path.join(SRC, 'dist');
+const legal = [
+  ['privacy-policy', 'Privacy Policy'], ['terms', 'Terms of Use'],
+  ['notice-of-privacy-practices', 'Notice of Privacy Practices'], ['consumer-health-data', 'Consumer Health Data'],
+  ['privacy-choices', 'Your Privacy Choices'], ['accessibility', 'Accessibility'],
+  ['non-discrimination-notice', 'Nondiscrimination & Accessibility'],
+];
+const rewriteLinks = html => html
+  .replace(/\/newbeginnings-recovery\//g, B)
+  .replace(new RegExp(B.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '([a-z0-9-]+)\\/(?=["#?])', 'g'), (m0, seg) => (seg === 'images' || seg === 'assets') ? m0 : `${B}${seg}.html`);
+
+for (const [slug, label] of legal) {
+  const html = await fs.readFile(path.join(distDir, slug, 'index.html'), 'utf8');
+  const root = parseHTML(html);
+  const main = root.querySelector('main');
+  const hero = main.querySelector('.page-hero');
+  const h1 = hero?.querySelector('h1')?.text.trim() || label;
+  const eyebrow = hero?.querySelector('.eyebrow')?.text.trim() || 'Legal';
+  const lede = hero?.querySelector('.lede')?.innerHTML.trim() || '';
+  if (hero) hero.remove();
+  const bodyHTML = rewriteLinks(main.innerHTML);
+  pages[`${slug}.html`] = shell({ active: '', title: `${label} — New Beginnings Recovery`, desc: `${label} for New Beginnings Recovery, Rancho Mirage, California.`, main: `
+<header class="page-hero"><div class="wrap"><span class="eyebrow reveal">${eyebrow}</span><h1 class="reveal">${h1}</h1>${lede ? `<p class="lede reveal">${lede}</p>` : ''}</div></header>
+${bodyHTML}` });
+}
 
 // ============================ WRITE ============================
 for (const [file, html] of Object.entries(pages)) {
