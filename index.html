@@ -6,24 +6,43 @@
 <meta name="description" content="Design preview: a premium redesign concept for New Beginnings Recovery, private medical detox and residential addiction treatment in Rancho Mirage, California." />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex" />
+<script>try{var t=localStorage.getItem('nbr-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" />
 <style>
   /* ===== First Light × Desert Calm — real assets ===== */
   :root {
-    --bg:#0F1319; --bg-2:#0B0E13; --surface:#171F29; --surface-2:#1E2833;
-    --hair:rgba(230,184,122,.16); --hair-soft:rgba(240,234,222,.09);
-    --text:#F1EBDF; --text-soft:#C9C0B0; --text-mute:#8B8474;
-    --gold:#E6B87A; --gold-deep:#D2924E; --gold-ink:#F4D6A6;
-    --teal:#7FA6B8;
+    /* Day (default). Follows the system setting unless the toggle overrides it.
+       Nav, hero and footer stay dark in both modes; the body sections adapt. */
+    --bg:#FBF8F2; --bg-2:#F1EBDF; --surface:#FFFFFF; --surface-2:#F7F1E7;
+    --hair:rgba(60,45,20,.14); --hair-soft:rgba(60,45,20,.07);
+    --text:#23201B; --text-soft:#554E43; --text-mute:#8B8271;
+    --gold:#9A6C22; --gold-deep:#C08A3E; --gold-ink:#E7C98A;
+    --teal:#2E6E7C;
+    --shadow:0 20px 50px -26px rgba(60,45,20,.3);
+    --shadow-gold:0 16px 40px -20px rgba(192,138,62,.38);
     --r-sm:8px; --r-md:14px; --r-btn:10px; --r-lg:24px; --r-pill:999px;
     --ease:cubic-bezier(.22,.61,.36,1);
     --serif:"Fraunces","Iowan Old Style",Georgia,serif;
     --sans:"Hanken Grotesk",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
     --maxw:1180px;
-    --shadow:0 24px 60px -24px rgba(0,0,0,.7);
-    --shadow-gold:0 18px 46px -20px rgba(214,146,78,.42);
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#0F1319; --bg-2:#0B0E13; --surface:#171F29; --surface-2:#1E2833;
+      --hair:rgba(230,184,122,.16); --hair-soft:rgba(240,234,222,.09);
+      --text:#F1EBDF; --text-soft:#C9C0B0; --text-mute:#8B8474;
+      --gold:#E6B87A; --gold-deep:#D2924E; --gold-ink:#F4D6A6; --teal:#7FA6B8;
+      --shadow:0 24px 60px -24px rgba(0,0,0,.7); --shadow-gold:0 18px 46px -20px rgba(214,146,78,.42);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0F1319; --bg-2:#0B0E13; --surface:#171F29; --surface-2:#1E2833;
+    --hair:rgba(230,184,122,.16); --hair-soft:rgba(240,234,222,.09);
+    --text:#F1EBDF; --text-soft:#C9C0B0; --text-mute:#8B8474;
+    --gold:#E6B87A; --gold-deep:#D2924E; --gold-ink:#F4D6A6; --teal:#7FA6B8;
+    --shadow:0 24px 60px -24px rgba(0,0,0,.7); --shadow-gold:0 18px 46px -20px rgba(214,146,78,.42);
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
@@ -45,19 +64,23 @@
   :focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:6px;}
 
   /* nav */
+  /* Nav is a theme-independent dark bar (it sits over the dark hero). */
   .nav{position:fixed;inset:0 0 auto 0;z-index:60;transition:background .4s var(--ease),border-color .4s;border-bottom:1px solid transparent;}
-  .nav.scrolled{background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:saturate(1.5) blur(14px);border-bottom-color:var(--hair-soft);}
-  .nav-inner{display:flex;align-items:center;gap:1.4rem;min-height:76px;}
-  .brand{display:inline-flex;align-items:center;}
-  .brand img{height:42px;width:auto;}
-  .nav-links{display:flex;gap:1.7rem;margin-inline:auto;}
-  .nav-links a{font-weight:500;font-size:.95rem;color:var(--text-soft);position:relative;padding:.3rem 0;}
-  .nav-links a::after{content:"";position:absolute;left:0;bottom:-2px;height:1.5px;width:0;background:var(--gold);transition:width .3s var(--ease);}
-  .nav-links a:hover{color:var(--text);} .nav-links a:hover::after{width:100%;}
-  .nav-cta{display:flex;align-items:center;gap:.7rem;}
-  .nav-phone{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;font-size:.95rem;background:linear-gradient(180deg,var(--gold-ink),var(--gold-deep));color:#2A1A08;padding:.6rem 1rem;border-radius:var(--r-btn);}
+  .nav.scrolled{background:rgba(11,14,19,.84);backdrop-filter:saturate(1.5) blur(14px);border-bottom-color:rgba(240,234,222,.1);}
+  .nav-inner{display:flex;align-items:center;gap:1.4rem;min-height:86px;}
+  .brand{display:inline-flex;align-items:center;margin-inline-end:auto;}
+  .brand img{height:50px;width:auto;}
+  .nav-links{display:flex;gap:1.7rem;}
+  .nav-links a{font-weight:500;font-size:.98rem;color:#CBC2B2;position:relative;padding:.3rem 0;}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:-2px;height:1.5px;width:0;background:#E6B87A;transition:width .3s var(--ease);}
+  .nav-links a:hover{color:#F1EBDF;} .nav-links a:hover::after{width:100%;}
+  .nav-cta{display:flex;align-items:center;gap:.6rem;}
+  .nav-phone{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;font-size:.98rem;background:linear-gradient(180deg,#F4D6A6,#D2924E);color:#2A1A08;padding:.65rem 1.05rem;border-radius:var(--r-btn);}
   .nav-phone svg{width:16px;height:16px;}
-  .nav-toggle{display:none;background:none;border:1px solid var(--hair);border-radius:var(--r-sm);width:44px;height:44px;color:var(--text);cursor:pointer;}
+  .nav-theme{background:none;border:1px solid rgba(230,184,122,.22);border-radius:var(--r-sm);width:44px;height:44px;color:#F1EBDF;cursor:pointer;display:grid;place-items:center;}
+  .nav-theme:hover{border-color:#E6B87A;}
+  .nav-theme svg{width:19px;height:19px;}
+  .nav-toggle{display:none;background:none;border:1px solid rgba(230,184,122,.22);border-radius:var(--r-sm);width:44px;height:44px;color:#F1EBDF;cursor:pointer;}
 
   /* hero with real photo */
   .hero{position:relative;min-height:100svh;display:flex;align-items:center;padding:7rem 0 4rem;overflow:hidden;}
@@ -67,13 +90,15 @@
      linear-gradient(180deg,rgba(9,12,16,.45) 0%,rgba(9,12,16,.28) 40%,rgba(9,12,16,.6) 100%),
      radial-gradient(90% 60% at 50% 120%,rgba(240,192,121,.3),transparent 60%);}
   .hero-inner{position:relative;z-index:3;max-width:640px;}
-  .hero h1{font-size:clamp(2.6rem,6vw,4.4rem);text-shadow:0 2px 26px rgba(0,0,0,.45);}
-  .hero h1 em{font-style:italic;color:var(--gold-ink);}
-  .hero .lead{margin-top:1.4rem;font-size:clamp(1.05rem,1.7vw,1.28rem);color:var(--text-soft);max-width:34em;text-shadow:0 1px 16px rgba(0,0,0,.5);}
+  .hero .eyebrow{color:#E6B87A;}
+  .hero .eyebrow::before{background:linear-gradient(90deg,transparent,#E6B87A);}
+  .hero h1{font-size:clamp(2.6rem,6vw,4.4rem);color:#F5EFE3;text-shadow:0 2px 26px rgba(0,0,0,.5);}
+  .hero h1 em{font-style:italic;color:#F4D6A6;}
+  .hero .lead{margin-top:1.4rem;font-size:clamp(1.05rem,1.7vw,1.28rem);color:#DBD2C2;max-width:34em;text-shadow:0 1px 16px rgba(0,0,0,.55);}
   .hero-actions{margin-top:2.2rem;display:flex;flex-wrap:wrap;gap:.85rem;}
-  .hero-trust{margin-top:2.4rem;display:flex;flex-wrap:wrap;gap:.5rem 1.3rem;font-size:.82rem;color:var(--text-mute);}
+  .hero-trust{margin-top:2.4rem;display:flex;flex-wrap:wrap;gap:.5rem 1.3rem;font-size:.82rem;color:#C7BCA6;}
   .hero-trust span{display:inline-flex;align-items:center;gap:.45rem;}
-  .hero-trust svg{width:15px;height:15px;color:var(--gold);flex:none;}
+  .hero-trust svg{width:15px;height:15px;color:#E6B87A;flex:none;}
 
   section{position:relative;}
   .band{padding:6rem 0;}
@@ -131,15 +156,15 @@
   .panel .hero-actions{justify-content:center;}
 
   /* footer */
-  footer{border-top:1px solid var(--hair-soft);background:var(--bg-2);padding:3.5rem 0 2.2rem;}
+  footer{border-top:1px solid rgba(240,234,222,.08);background:#0B0E13;padding:3.5rem 0 2.2rem;}
   .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:2.4rem;}
-  .foot-grid img{height:40px;width:auto;margin-bottom:1rem;}
-  .foot-grid h4{font-family:var(--sans);font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-mute);margin:0 0 1rem;}
-  .foot-grid a,.foot-grid p{color:var(--text-soft);font-size:.9rem;display:block;margin-bottom:.5rem;}
-  .foot-grid a:hover{color:var(--gold);}
-  .disclaimer{background:rgba(214,146,78,.07);border:1px solid var(--hair);border-radius:var(--r-md);padding:1rem 1.2rem;font-size:.82rem;color:var(--text-soft);margin-bottom:2.4rem;}
-  .disclaimer strong{color:var(--gold-ink);}
-  .foot-bottom{margin-top:2.6rem;padding-top:1.6rem;border-top:1px solid var(--hair-soft);font-size:.8rem;color:var(--text-mute);display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;}
+  .foot-grid img{height:46px;width:auto;margin-bottom:1rem;}
+  .foot-grid h4{font-family:var(--sans);font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:#8B8474;margin:0 0 1rem;}
+  .foot-grid a,.foot-grid p{color:#C9C0B0;font-size:.9rem;display:block;margin-bottom:.5rem;}
+  .foot-grid a:hover{color:#E6B87A;}
+  .disclaimer{background:rgba(214,146,78,.09);border:1px solid rgba(230,184,122,.2);border-radius:var(--r-md);padding:1rem 1.2rem;font-size:.82rem;color:#C9C0B0;margin-bottom:2.4rem;}
+  .disclaimer strong{color:#F4D6A6;}
+  .foot-bottom{margin-top:2.6rem;padding-top:1.6rem;border-top:1px solid rgba(240,234,222,.08);font-size:.8rem;color:#8B8474;display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;}
 
   /* sticky mobile call bar */
   .callbar{display:none;}
@@ -156,8 +181,8 @@
     .split{grid-template-columns:1fr;gap:2rem;}
     .foot-grid{grid-template-columns:1fr 1fr;}
     .nav-links{display:none;} .nav-toggle{display:grid;place-items:center;}
-    .nav-links.open{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;margin:0;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(14px);padding:.5rem 1.2rem 1.2rem;border-bottom:1px solid var(--hair);}
-    .nav-links.open a{padding:.9rem 0;border-top:1px solid var(--hair-soft);}
+    .nav-links.open{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;margin:0;background:rgba(11,14,19,.97);backdrop-filter:blur(14px);padding:.5rem 1.2rem 1.2rem;border-bottom:1px solid rgba(240,234,222,.1);}
+    .nav-links.open a{padding:.9rem 0;border-top:1px solid rgba(240,234,222,.08);}
   }
   @media (max-width:768px){
     body{padding-bottom:4.4rem;}
@@ -184,6 +209,7 @@
       <a href="#insurance">Insurance</a>
     </div>
     <div class="nav-cta">
+      <button class="nav-theme" id="themeToggle" aria-label="Switch day / night theme" title="Theme"></button>
       <a class="nav-phone" href="tel:+17607623605"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 4h4l2 5-3 2a12 12 0 006 6l2-3 5 2v4a2 2 0 01-2 2A17 17 0 013 6a2 2 0 012-2z"/></svg><span class="num">(760) 762-3605</span></a>
       <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     </div>
@@ -214,7 +240,7 @@
     <div class="acc"><img src="images/badges/dhcs-logo.png" alt="California DHCS" /><div>State of California — DHCS<small>License #330232AP · Exp. 07/31/2027</small></div></div>
     <div class="acc"><img src="images/badges/legitscript-seal-example.png" alt="LegitScript Certified" /><div>LegitScript<small>Certified treatment provider</small></div></div>
     <div class="acc"><span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7z"/><path d="M9 12l2 2 4-4"/></svg></span><div>Confidential care<small>HIPAA &amp; 42 CFR Part 2</small></div></div>
-    <div class="acc"><span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span><div>Admissions 24/7<small>Most major PPO insurance</small></div></div>
+    <div class="acc"><span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span><div>Admissions 24/7<small>Most major PPO plans accepted</small></div></div>
   </div>
 </div>
 
@@ -284,7 +310,7 @@
   <div class="wrap">
     <div class="panel reveal">
       <span class="eyebrow" style="justify-content:center">Paying for care</span>
-      <h2 style="margin-top:1rem">Most PPO insurance is accepted.</h2>
+      <h2 style="margin-top:1rem">Most PPO plans are accepted.</h2>
       <p>Send your details through a secure, confidential check and we'll verify your benefits — usually the same day. No obligation, and nothing shared with advertisers.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="tel:+17607623605">Verify my insurance</a>
@@ -322,6 +348,26 @@
   const t=document.getElementById('navToggle'),l=document.getElementById('navlinks');
   t.addEventListener('click',()=>{const o=l.classList.toggle('open');t.setAttribute('aria-expanded',String(o));});
   l.addEventListener('click',e=>{if(e.target.tagName==='A'){l.classList.remove('open');t.setAttribute('aria-expanded','false');}});
+
+  // Day / night theme — default follows the system setting; toggle cycles system → day → night.
+  const themeBtn=document.getElementById('themeToggle');
+  const icons={
+    system:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>',
+    light:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>',
+    dark:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>'
+  };
+  const order=['system','light','dark'];
+  const getTheme=()=>{try{return localStorage.getItem('nbr-theme')||'system';}catch(e){return 'system';}};
+  const paintTheme=v=>{themeBtn.innerHTML=icons[v];themeBtn.title='Theme: '+v+' (click to change)';};
+  const applyTheme=v=>{
+    if(v==='light'||v==='dark')document.documentElement.setAttribute('data-theme',v);
+    else document.documentElement.removeAttribute('data-theme');
+    try{v==='system'?localStorage.removeItem('nbr-theme'):localStorage.setItem('nbr-theme',v);}catch(e){}
+    paintTheme(v);
+  };
+  themeBtn.addEventListener('click',()=>{const c=getTheme();applyTheme(order[(order.indexOf(c)+1)%order.length]);});
+  paintTheme(getTheme());
+
   const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
   if(!reduce&&'IntersectionObserver'in window){
     const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
