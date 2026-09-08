@@ -224,7 +224,7 @@ section{position:relative;}
 
 /* footer — theme-independent dark */
 footer{border-top:1px solid rgba(240,234,222,.08);background:#0B0E13;padding:3.5rem 0 2.2rem;}
-.foot-grid{display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr;gap:2rem;}
+.foot-grid{display:grid;grid-template-columns:1.7fr 1fr 1.1fr;gap:2.2rem;}
 .foot-grid img{height:46px;width:auto;margin-bottom:1rem;}
 .foot-grid h4{font-family:var(--sans);font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:#8B8474;margin:0 0 1rem;}
 .foot-grid a,.foot-grid p{color:#C9C0B0;font-size:.9rem;display:block;margin-bottom:.5rem;}

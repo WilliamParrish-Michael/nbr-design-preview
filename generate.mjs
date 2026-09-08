@@ -55,8 +55,6 @@ const FOOTER = `<footer><div class="wrap">
       <a href="${B}about.html">About</a><a href="${B}programs.html">Programs</a><a href="${B}wellness.html">Wellness</a><a href="${B}family.html">Family</a><a href="${B}virtual-tour.html">Virtual Tour</a><a href="${B}blog.html">Blog</a><a href="${B}resources.html">Resources</a><a href="${B}contact.html">Contact</a></div>
     <div><h4>Legal</h4>
       <a href="${B}privacy-policy.html">Privacy Policy</a><a href="${B}notice-of-privacy-practices.html">Notice of Privacy Practices</a><a href="${B}consumer-health-data.html">Consumer Health Data</a><a href="${B}privacy-choices.html">Your Privacy Choices</a><a href="${B}non-discrimination-notice.html">Nondiscrimination</a><a href="${B}accessibility.html">Accessibility</a><a href="${B}terms.html">Terms of Use</a></div>
-    <div><h4>Compare</h4>
-      <a href="${B}design-audit.html">Design audit</a><a href="${B}first-light.html">Original concept</a><a href="https://williamparrish-michael.github.io/newbeginnings-recovery/">Rebuild (Astro)</a></div>
   </div>
   <div class="foot-bottom"><span>© 2026 New Beginnings Recovery · design preview</span><span>Confidential care · HIPAA &amp; 42 CFR Part 2</span></div>
 </div></footer>`;
