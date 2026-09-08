@@ -1,0 +1,501 @@
+<title>New Beginnings Recovery</title>
+<meta name="description" content="Private, physician-led medical detox and residential addiction treatment in a Rancho Mirage estate. 24/7 admissions. DHCS licensed, Joint Commission accredited, confidential." />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" />
+
+<style>
+  /* ============ DESIGN TOKENS — "First Light over the desert" ============ */
+  /* A single, deliberately dark cinematic world (desert twilight → dawn).
+     Every color is painted explicitly so the page holds on any host ground. */
+  :root {
+    --bg:        #0F1319;   /* deep warm twilight */
+    --bg-2:      #0B0E13;
+    --surface:   #171F29;
+    --surface-2: #1E2833;
+    --hair:      rgba(230,184,122,.16);
+    --hair-soft: rgba(240,234,222,.08);
+
+    --text:      #F1EBDF;   /* warm off-white */
+    --text-soft: #C9C0B0;
+    --text-mute: #8B8474;
+
+    --gold:      #E6B87A;   /* dawn */
+    --gold-deep: #D2924E;
+    --gold-ink:  #F4D6A6;
+    --horizon:   #7FA6B8;   /* muted dawn-sky blue, used sparingly */
+
+    --r-sm: 10px; --r-md: 16px; --r-lg: 26px; --r-pill: 999px;
+    --shadow: 0 24px 60px -24px rgba(0,0,0,.7);
+    --shadow-gold: 0 20px 50px -20px rgba(214,146,78,.4);
+    --maxw: 1160px;
+    --ease: cubic-bezier(.22,.61,.36,1);
+    --serif: "Fraunces", "Iowan Old Style", Georgia, serif;
+    --sans:  "Hanken Grotesk", ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.06; letter-spacing: -.01em; text-wrap: balance; margin: 0; }
+  p { margin: 0; }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  .wrap { width: min(100% - 2.5rem, var(--maxw)); margin-inline: auto; }
+  .eyebrow {
+    font-family: var(--sans); font-weight: 600; font-size: .74rem;
+    letter-spacing: .22em; text-transform: uppercase; color: var(--gold);
+    display: inline-flex; align-items: center; gap: .6rem;
+  }
+  .eyebrow::before { content: ""; width: 26px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold)); }
+
+  /* ============ BUTTONS ============ */
+  .btn {
+    --pad: .95rem 1.5rem;
+    display: inline-flex; align-items: center; justify-content: center; gap: .55rem;
+    padding: var(--pad); border-radius: var(--r-pill);
+    font-family: var(--sans); font-weight: 600; font-size: .96rem; letter-spacing: .01em;
+    border: 1px solid transparent; cursor: pointer; white-space: nowrap;
+    transition: transform .35s var(--ease), box-shadow .35s var(--ease), background .3s var(--ease), border-color .3s var(--ease);
+    will-change: transform;
+  }
+  .btn-primary { background: linear-gradient(180deg, var(--gold-ink), var(--gold-deep)); color: #2A1A08; box-shadow: var(--shadow-gold); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 26px 60px -18px rgba(214,146,78,.55); }
+  .btn-ghost { background: rgba(241,235,223,.04); color: var(--text); border-color: var(--hair); }
+  .btn-ghost:hover { background: rgba(241,235,223,.08); border-color: var(--gold); transform: translateY(-2px); }
+  .btn svg { width: 18px; height: 18px; }
+  :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 6px; }
+
+  /* ============ NAV (sticky glass) ============ */
+  .nav {
+    position: fixed; inset: 0 0 auto 0; z-index: 60;
+    transition: background .4s var(--ease), border-color .4s var(--ease), backdrop-filter .4s;
+    border-bottom: 1px solid transparent;
+  }
+  .nav.scrolled { background: color-mix(in srgb, var(--bg) 72%, transparent); backdrop-filter: saturate(1.6) blur(14px); border-bottom-color: var(--hair-soft); }
+  .nav-inner { display: flex; align-items: center; gap: 1.5rem; min-height: 74px; }
+  .brand { font-family: var(--serif); font-weight: 600; font-size: 1.28rem; letter-spacing: -.02em; display: inline-flex; align-items: baseline; gap: .5rem; }
+  .brand .dot { width: 8px; height: 8px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, var(--gold-ink), var(--gold-deep)); box-shadow: 0 0 16px var(--gold); align-self: center; }
+  .nav-links { display: flex; gap: 1.9rem; margin-inline: auto; }
+  .nav-links a { font-weight: 500; font-size: .95rem; color: var(--text-soft); position: relative; padding: .3rem 0; }
+  .nav-links a::after { content: ""; position: absolute; left: 0; bottom: -2px; height: 1.5px; width: 0; background: var(--gold); transition: width .3s var(--ease); }
+  .nav-links a:hover { color: var(--text); } .nav-links a:hover::after { width: 100%; }
+  .nav-cta { display: flex; align-items: center; gap: .7rem; }
+  .nav-phone { font-weight: 600; font-size: .95rem; color: var(--text); display: inline-flex; align-items: center; gap: .5rem; }
+  .nav-phone svg { width: 16px; height: 16px; color: var(--gold); }
+  .nav-toggle { display: none; background: none; border: 1px solid var(--hair); border-radius: var(--r-sm); width: 44px; height: 44px; color: var(--text); cursor: pointer; }
+
+  /* ============ HERO ============ */
+  .hero { position: relative; min-height: 100svh; display: flex; align-items: center; padding: 8rem 0 5rem; overflow: hidden; }
+  .hero-sky { position: absolute; inset: 0; z-index: 0; background:
+      radial-gradient(120% 90% at 50% 118%, #F0C079 0%, rgba(210,146,78,.55) 14%, rgba(126,94,52,.15) 30%, transparent 52%),
+      radial-gradient(90% 70% at 78% 8%, rgba(127,166,184,.14), transparent 55%),
+      linear-gradient(180deg, #070A0F 0%, #0C1017 42%, #14161B 78%, #241a0f 100%);
+  }
+  #stars { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; opacity: .9; }
+  .hero-glow { position: absolute; left: 50%; bottom: -32%; z-index: 1; width: 130%; height: 60%; transform: translateX(-50%);
+    background: radial-gradient(50% 100% at 50% 100%, rgba(240,192,121,.55), rgba(214,146,78,.16) 45%, transparent 72%);
+    filter: blur(28px); }
+  .hero-inner { position: relative; z-index: 3; max-width: 720px; }
+  .hero h1 { font-size: clamp(2.7rem, 6.4vw, 4.7rem); font-weight: 500; }
+  .hero h1 em { font-style: italic; color: var(--gold-ink); }
+  .hero p.lead { margin-top: 1.5rem; font-size: clamp(1.05rem, 1.8vw, 1.3rem); color: var(--text-soft); max-width: 34em; line-height: 1.55; }
+  .hero-actions { margin-top: 2.3rem; display: flex; flex-wrap: wrap; gap: .9rem; }
+  .hero-trust { margin-top: 2.6rem; display: flex; flex-wrap: wrap; gap: .55rem 1.4rem; font-size: .82rem; color: var(--text-mute); }
+  .hero-trust span { display: inline-flex; align-items: center; gap: .5rem; }
+  .hero-trust .tick { width: 15px; height: 15px; color: var(--gold); flex: none; }
+
+  /* ============ SECTIONS ============ */
+  section { position: relative; }
+  .band { padding: 6.5rem 0; }
+  .section-head { max-width: 640px; margin-bottom: 3.2rem; }
+  .section-head h2 { font-size: clamp(2rem, 4vw, 3rem); margin-top: 1.1rem; }
+  .section-head p { margin-top: 1.1rem; color: var(--text-soft); font-size: 1.08rem; }
+
+  /* accreditation marquee */
+  .trustbar { border-block: 1px solid var(--hair-soft); background: var(--bg-2); }
+  .trustbar .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.4rem 2rem; padding: 1.9rem 0; }
+  .accred { display: inline-flex; align-items: center; gap: .7rem; color: var(--text-soft); font-weight: 500; font-size: .92rem; }
+  .accred .seal { width: 34px; height: 34px; border-radius: 8px; display: grid; place-items: center; background: rgba(230,184,122,.1); border: 1px solid var(--hair); color: var(--gold); }
+  .accred .seal svg { width: 18px; height: 18px; }
+  .accred small { display: block; color: var(--text-mute); font-size: .76rem; font-weight: 400; }
+
+  /* problem — quiet, full-width statement */
+  .empathy { background: linear-gradient(180deg, var(--bg), var(--bg-2)); }
+  .empathy .big { font-family: var(--serif); font-size: clamp(1.9rem, 3.8vw, 3rem); line-height: 1.15; max-width: 16ch; }
+  .empathy .big .soft { color: var(--text-mute); }
+  .empathy .cols { margin-top: 3rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .empathy .cols p { color: var(--text-soft); font-size: .98rem; padding-top: 1.2rem; border-top: 1px solid var(--hair); }
+  .empathy .cols strong { display: block; font-family: var(--serif); font-size: 1.15rem; color: var(--text); margin-bottom: .4rem; font-weight: 500; }
+
+  /* programs grid */
+  .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+  .card {
+    position: relative; padding: 2.1rem; border-radius: var(--r-lg);
+    background: linear-gradient(180deg, var(--surface), var(--surface-2));
+    border: 1px solid var(--hair); overflow: hidden;
+    transition: transform .4s var(--ease), border-color .4s var(--ease), box-shadow .4s var(--ease);
+  }
+  .card::after { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px;
+    background: linear-gradient(140deg, rgba(230,184,122,.5), transparent 40%); opacity: 0;
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
+    transition: opacity .4s var(--ease); pointer-events: none; }
+  .card:hover { transform: translateY(-6px); border-color: transparent; box-shadow: var(--shadow); }
+  .card:hover::after { opacity: 1; }
+  .card .ico { width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center; margin-bottom: 1.3rem;
+    background: rgba(230,184,122,.12); border: 1px solid var(--hair); color: var(--gold); }
+  .card .ico svg { width: 24px; height: 24px; }
+  .card h3 { font-size: 1.42rem; margin-bottom: .6rem; }
+  .card p { color: var(--text-soft); font-size: .98rem; }
+  .card .more { margin-top: 1.3rem; display: inline-flex; align-items: center; gap: .45rem; color: var(--gold); font-weight: 600; font-size: .9rem; }
+  .card .more svg { width: 15px; height: 15px; transition: transform .3s var(--ease); }
+  .card:hover .more svg { transform: translateX(4px); }
+
+  /* experience split */
+  .split { display: grid; grid-template-columns: 1.05fr .95fr; gap: 3.5rem; align-items: center; }
+  .split-visual { position: relative; aspect-ratio: 4/5; border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--hair);
+    background: radial-gradient(120% 80% at 50% 120%, rgba(240,192,121,.4), transparent 55%), linear-gradient(180deg, #0B0E13, #1a130b); box-shadow: var(--shadow); }
+  .split-visual .vlabel { position: absolute; left: 1.5rem; bottom: 1.5rem; z-index: 2; }
+  .split-visual .vlabel .k { font-family: var(--serif); font-size: 2.6rem; color: var(--gold-ink); line-height: 1; }
+  .split-visual .vlabel .t { color: var(--text-soft); font-size: .9rem; margin-top: .35rem; }
+  .split-visual .vstars { position: absolute; inset: 0; z-index: 1; }
+  .checklist { list-style: none; padding: 0; margin: 1.8rem 0 0; display: grid; gap: 1.15rem; }
+  .checklist li { display: grid; grid-template-columns: auto 1fr; gap: .9rem; }
+  .checklist .tick { width: 24px; height: 24px; border-radius: 50%; background: rgba(230,184,122,.12); border: 1px solid var(--hair); color: var(--gold); display: grid; place-items: center; margin-top: 2px; }
+  .checklist .tick svg { width: 13px; height: 13px; }
+  .checklist strong { display: block; font-family: var(--serif); font-weight: 500; font-size: 1.1rem; margin-bottom: .3rem; }
+  .checklist span.d { display: block; color: var(--text-soft); font-size: .95rem; }
+
+  /* testimonials (honest placeholders) */
+  .quotes { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.2rem; }
+  .quote { padding: 1.9rem; border-radius: var(--r-md); background: var(--surface); border: 1px solid var(--hair); }
+  .quote .mark { font-family: var(--serif); font-size: 2.6rem; color: var(--gold-deep); line-height: .6; }
+  .quote p { color: var(--text-soft); font-style: italic; margin: .8rem 0 1.4rem; }
+  .quote .who { font-size: .85rem; color: var(--text-mute); }
+  .ph-note { margin-top: 1.4rem; font-size: .82rem; color: var(--text-mute); display: flex; gap: .5rem; align-items: flex-start; }
+  .ph-note svg { width: 15px; height: 15px; color: var(--gold); flex: none; margin-top: 2px; }
+
+  /* insurance / CTA panel */
+  .panel { border-radius: var(--r-lg); padding: clamp(2.2rem, 5vw, 4.2rem); text-align: center;
+    background: radial-gradient(120% 130% at 50% 0%, rgba(214,146,78,.22), transparent 60%), linear-gradient(180deg, var(--surface), var(--bg-2));
+    border: 1px solid var(--hair); position: relative; overflow: hidden; }
+  .panel h2 { font-size: clamp(2.1rem, 4.5vw, 3.4rem); }
+  .panel p { margin: 1.2rem auto 0; max-width: 46ch; color: var(--text-soft); font-size: 1.08rem; }
+  .panel .hero-actions { justify-content: center; }
+
+  /* footer */
+  footer { border-top: 1px solid var(--hair-soft); background: var(--bg-2); padding: 4rem 0 2.5rem; margin-top: 1rem; }
+  .foot-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 2.5rem; }
+  .foot-grid h4 { font-family: var(--sans); font-size: .78rem; letter-spacing: .16em; text-transform: uppercase; color: var(--text-mute); margin: 0 0 1.1rem; }
+  .foot-grid a, .foot-grid p { color: var(--text-soft); font-size: .92rem; display: block; margin-bottom: .55rem; }
+  .foot-grid a:hover { color: var(--gold); }
+  .foot-bottom { margin-top: 3rem; padding-top: 1.8rem; border-top: 1px solid var(--hair-soft); font-size: .8rem; color: var(--text-mute); display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; }
+  .disclaimer { background: rgba(214,146,78,.07); border: 1px solid var(--hair); border-radius: var(--r-md); padding: 1rem 1.2rem; font-size: .82rem; color: var(--text-soft); margin-bottom: 2.5rem; }
+  .disclaimer strong { color: var(--gold-ink); }
+
+  /* ============ SCROLL REVEAL (progressive enhancement) ============ */
+  .js .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+  .js .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .js .reveal { opacity: 1 !important; transform: none !important; transition: none; }
+    #stars, .vstars { display: none; }
+    .hero-glow { animation: none; }
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 900px) {
+    .empathy .cols, .quotes { grid-template-columns: 1fr; }
+    .cards { grid-template-columns: 1fr; }
+    .split { grid-template-columns: 1fr; gap: 2.2rem; }
+    .foot-grid { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+    .nav-toggle { display: grid; place-items: center; }
+    .nav-links.open { display: flex; position: absolute; top: 74px; left: 0; right: 0; flex-direction: column; gap: 0; margin: 0;
+      background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(14px); padding: .5rem 1.25rem 1.25rem; border-bottom: 1px solid var(--hair); }
+    .nav-links.open a { padding: .95rem 0; border-top: 1px solid var(--hair-soft); }
+  }
+  @media (max-width: 560px) {
+    .nav-phone .num { display: none; }
+    .foot-grid { grid-template-columns: 1fr; }
+    .band { padding: 4.5rem 0; }
+  }
+</style>
+
+<!-- ============================== NAV ============================== -->
+<nav class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand" aria-label="New Beginnings Recovery — home"><span class="dot" aria-hidden="true"></span>New Beginnings</a>
+    <div class="nav-links" id="navlinks">
+      <a href="#programs">Programs</a>
+      <a href="#care">The Experience</a>
+      <a href="#insurance">Insurance</a>
+      <a href="#voices">Stories</a>
+    </div>
+    <div class="nav-cta">
+      <a class="nav-phone" href="tel:+17607623605"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-3 2a12 12 0 006 6l2-3 5 2v4a2 2 0 01-2 2A17 17 0 013 6a2 2 0 012-2z"/></svg><span class="num">(760) 762-3605</span></a>
+      <a class="btn btn-primary" href="#insurance" data-magnetic>Verify insurance</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================== HERO ============================== -->
+<header class="hero" id="top">
+  <div class="hero-sky" aria-hidden="true"></div>
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <div class="hero-glow" id="heroGlow" aria-hidden="true"></div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow reveal">Private detox &amp; residential care · Rancho Mirage</span>
+    <h1 class="reveal">A calmer place<br>to <em>begin again.</em></h1>
+    <p class="lead reveal">Physician-led medical detox and residential treatment in a private desert estate. Around-the-clock care, complete discretion, and a team that answers the moment you call.</p>
+    <div class="hero-actions reveal">
+      <a class="btn btn-primary" href="tel:+17607623605" data-magnetic><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-3 2a12 12 0 006 6l2-3 5 2v4a2 2 0 01-2 2A17 17 0 013 6a2 2 0 012-2z"/></svg>Call 24/7 — (760) 762-3605</a>
+      <a class="btn btn-ghost" href="#insurance" data-magnetic>Verify your insurance</a>
+    </div>
+    <div class="hero-trust reveal">
+      <span><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>DHCS licensed</span>
+      <span><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>Joint Commission accredited</span>
+      <span><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>LegitScript certified</span>
+      <span><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>Confidential — HIPAA &amp; 42 CFR Part 2</span>
+    </div>
+  </div>
+</header>
+
+<!-- ============================== TRUST BAR ============================== -->
+<div class="trustbar">
+  <div class="wrap">
+    <div class="accred"><span class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l7 4v6c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6z"/></svg></span><div>State of California — DHCS<small>License #330232AP</small></div></div>
+    <div class="accred"><span class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1L12 16.6 5.7 21l2.3-7.1-6-4.5h7.6z"/></svg></span><div>The Joint Commission<small>Accredited program</small></div></div>
+    <div class="accred"><span class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12l2.5 2.5L16 9"/></svg></span><div>LegitScript<small>Certified treatment provider</small></div></div>
+    <div class="accred"><span class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg></span><div>Private &amp; confidential<small>Records protected by law</small></div></div>
+  </div>
+</div>
+
+<!-- ============================== EMPATHY / PROBLEM ============================== -->
+<section class="band empathy">
+  <div class="wrap">
+    <p class="eyebrow reveal">If today is the day</p>
+    <p class="big reveal" style="margin-top:1.1rem">You don't have to figure this out alone. <span class="soft">The hardest part is the phone call. We'll take it from there.</span></p>
+    <div class="cols">
+      <p class="reveal"><strong>It moves fast.</strong> Withdrawal from alcohol, benzodiazepines, or opioids can turn dangerous within hours. Medical supervision makes it safe.</p>
+      <p class="reveal"><strong>It's private.</strong> A quiet residence, not a hospital ward. What you tell us is protected by HIPAA and federal Part 2 confidentiality.</p>
+      <p class="reveal"><strong>It starts today.</strong> Admissions are open around the clock. Most people who call in the morning are settled in by evening.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== PROGRAMS ============================== -->
+<section class="band" id="programs">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow reveal">How we help</span>
+      <h2 class="reveal">Safe detox. Real treatment.<br>One private place.</h2>
+      <p class="reveal">Every stay is built around one person: medically, clinically, and personally. Care doesn't hand you off; it stays with you from the first night through the transition home.</p>
+    </div>
+    <div class="cards">
+      <article class="card reveal">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18M3 12h18" stroke-linecap="round"/><circle cx="12" cy="12" r="9"/></svg></span>
+        <h3>Medical Detox</h3>
+        <p>24/7 physician and nursing oversight, comfort medications, and continuous monitoring so withdrawal is managed safely, not endured.</p>
+        <span class="more">Explore detox <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </article>
+      <article class="card reveal">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg></span>
+        <h3>Residential Rehab</h3>
+        <p>A structured, unhurried stay in a private estate. Individual therapy, groups, and whole-person care that treats the reasons underneath the use.</p>
+        <span class="more">Explore residential <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </article>
+      <article class="card reveal">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21c-5-3-9-6-9-11a5 5 0 019-3 5 5 0 019 3c0 5-4 8-9 11z"/></svg></span>
+        <h3>Dual Diagnosis</h3>
+        <p>Addiction rarely travels alone. We treat anxiety, depression, trauma, and PTSD alongside substance use, because lasting recovery needs both.</p>
+        <span class="more">Explore dual diagnosis <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </article>
+      <article class="card reveal">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="10" r="2.4"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5M15 20c0-2 2-3.5 4-3.5"/></svg></span>
+        <h3>Family Support</h3>
+        <p>Addiction affects the whole family. Guided sessions and clear, HIPAA-appropriate updates help the people who love you heal too.</p>
+        <span class="more">Explore family care <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== EXPERIENCE ============================== -->
+<section class="band" id="care" style="background:linear-gradient(180deg,var(--bg),var(--bg-2))">
+  <div class="wrap split">
+    <div class="split-visual reveal" aria-hidden="true">
+      <canvas class="vstars" id="vstars"></canvas>
+      <div class="vlabel"><div class="k">24/7</div><div class="t">Physician-led medical supervision, every hour of every day.</div></div>
+    </div>
+    <div>
+      <span class="eyebrow reveal">What care feels like here</span>
+      <h2 class="reveal" style="font-size:clamp(2rem,4vw,2.9rem);margin-top:1.1rem">Recovery in a place that feels like rest, not a hospital.</h2>
+      <ul class="checklist">
+        <li class="reveal"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></span><div><strong>Around-the-clock medical team</strong><span class="d">Doctors and nurses on site 24/7, so the safest option is never far away.</span></div></li>
+        <li class="reveal"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></span><div><strong>A private, low-census setting</strong><span class="d">A quiet, comfortable residence in Rancho Mirage. Genuinely discreet.</span></div></li>
+        <li class="reveal"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></span><div><strong>One plan, built for you</strong><span class="d">Therapy, psychiatry, and whole-person care (nutrition, movement, mindfulness) in one coordinated plan.</span></div></li>
+        <li class="reveal"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></span><div><strong>A real plan for after</strong><span class="d">You leave with a concrete next step, not a discharge paper and a handshake.</span></div></li>
+      </ul>
+      <div class="hero-actions"><a class="btn btn-ghost reveal" href="#programs" data-magnetic>See the programs</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== VOICES (honest placeholders) ============================== -->
+<section class="band" id="voices">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow reveal">In their words</span>
+      <h2 class="reveal">Stories from the people who found their footing here.</h2>
+    </div>
+    <div class="quotes">
+      <figure class="quote reveal"><div class="mark">“</div><p>Replace with a real, written, consent-on-file quote from a former client or family member.</p><figcaption class="who">— First name &amp; last initial, with signed release</figcaption></figure>
+      <figure class="quote reveal"><div class="mark">“</div><p>Replace with a real, written, consent-on-file quote from a former client or family member.</p><figcaption class="who">— First name &amp; last initial, with signed release</figcaption></figure>
+      <figure class="quote reveal"><div class="mark">“</div><p>Replace with a real, written, consent-on-file quote from a former client or family member.</p><figcaption class="who">— First name &amp; last initial, with signed release</figcaption></figure>
+    </div>
+    <p class="ph-note reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg><span><strong style="color:var(--text-soft);font-weight:600">Placeholders on purpose.</strong> Testimonials must be real, voluntarily given, and consent-documented — fabricated reviews violate FTC rules, and patient stories carry HIPAA obligations. Add only genuine, released quotes here.</span></p>
+  </div>
+</section>
+
+<!-- ============================== INSURANCE / CTA ============================== -->
+<section class="band" id="insurance">
+  <div class="wrap">
+    <div class="panel reveal">
+      <span class="eyebrow" style="justify-content:center">Paying for care</span>
+      <h2 style="margin-top:1rem">Most PPO insurance is accepted.</h2>
+      <p>Send your insurance details through our secure, confidential form and we'll verify your benefits, usually the same day. No obligation, and nothing shared with advertisers.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#" data-magnetic>Verify my insurance</a>
+        <a class="btn btn-ghost" href="tel:+17607623605" data-magnetic>Or call (760) 762-3605</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== FOOTER ============================== -->
+<footer>
+  <div class="wrap">
+    <div class="disclaimer reveal"><strong>In an emergency, call 911.</strong> If you or someone else is in crisis, call or text <strong>988</strong> (Suicide &amp; Crisis Lifeline), available 24/7. This website is not a substitute for emergency medical care.</div>
+    <div class="foot-grid">
+      <div>
+        <a href="#top" class="brand" style="font-size:1.4rem"><span class="dot" aria-hidden="true"></span>New Beginnings Recovery</a>
+        <p style="margin-top:1rem">34620 Via Josefina<br>Rancho Mirage, CA 92270</p>
+        <p><a href="tel:+17607623605">(760) 762-3605</a> · available 24/7</p>
+        <p style="color:var(--text-mute)">DHCS License #330232AP · Exp. 07/31/2027</p>
+      </div>
+      <div>
+        <h4>Programs</h4>
+        <a href="#programs">Medical Detox</a>
+        <a href="#programs">Residential Rehab</a>
+        <a href="#programs">Dual Diagnosis</a>
+        <a href="#care">Family Support</a>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Notice of Privacy Practices</a>
+        <a href="#">Consumer Health Data</a>
+        <a href="#">Your Privacy Choices</a>
+        <a href="#">Terms of Use</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 New Beginnings Recovery. All rights reserved.</span>
+      <span>Confidential care · HIPAA &amp; 42 CFR Part 2</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Progressive enhancement flag — everything is visible without JS.
+  document.documentElement.classList.add('js');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Sticky-glass nav on scroll
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 24);
+  onScroll(); addEventListener('scroll', onScroll, { passive: true });
+
+  // Mobile menu
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navlinks');
+  toggle.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+  links.addEventListener('click', e => { if (e.target.tagName === 'A') { links.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); } });
+
+  // Scroll-reveal (IntersectionObserver) — content already visible if JS/observer absent
+  if (!reduce && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en, i) => { if (en.isIntersecting) { en.target.style.transitionDelay = (Math.min(i, 4) * 60) + 'ms'; en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+  }
+
+  // Magnetic buttons (pointer devices only)
+  if (!reduce && matchMedia('(pointer:fine)').matches) {
+    document.querySelectorAll('[data-magnetic]').forEach(btn => {
+      btn.addEventListener('pointermove', e => {
+        const r = btn.getBoundingClientRect();
+        const x = (e.clientX - r.left - r.width / 2) * .25;
+        const y = (e.clientY - r.top - r.height / 2) * .35;
+        btn.style.transform = `translate(${x}px, ${y}px)`;
+      });
+      btn.addEventListener('pointerleave', () => { btn.style.transform = ''; });
+    });
+  }
+
+  // Hero glow parallax
+  if (!reduce) {
+    const glow = document.getElementById('heroGlow');
+    addEventListener('scroll', () => { glow.style.transform = `translateX(-50%) translateY(${window.scrollY * -0.12}px)`; }, { passive: true });
+  }
+
+  // Starfield fading into the dawn horizon
+  function starfield(canvas, count) {
+    if (reduce || !canvas) return;
+    const ctx = canvas.getContext('2d');
+    let w, h, stars, raf;
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    function size() {
+      const r = canvas.getBoundingClientRect();
+      w = canvas.width = r.width * dpr; h = canvas.height = r.height * dpr;
+      stars = Array.from({ length: count }, () => ({
+        x: Math.random() * w, y: Math.random() * h * 0.72,
+        r: (Math.random() * 1.3 + 0.2) * dpr, tw: Math.random() * Math.PI * 2, sp: Math.random() * 0.02 + 0.005
+      }));
+    }
+    function frame() {
+      ctx.clearRect(0, 0, w, h);
+      for (const s of stars) {
+        s.tw += s.sp;
+        const a = (0.35 + Math.sin(s.tw) * 0.35) * (1 - s.y / (h * 0.85));
+        ctx.globalAlpha = Math.max(0, a);
+        ctx.fillStyle = '#F4E6C8';
+        ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2); ctx.fill();
+      }
+      raf = requestAnimationFrame(frame);
+    }
+    size(); frame();
+    let t; addEventListener('resize', () => { clearTimeout(t); t = setTimeout(size, 200); });
+  }
+  starfield(document.getElementById('stars'), 130);
+  starfield(document.getElementById('vstars'), 60);
+</script>

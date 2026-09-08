@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8" />
+<title>New Beginnings Recovery — Design Preview</title>
+<meta name="description" content="Design preview: a premium redesign concept for New Beginnings Recovery, private medical detox and residential addiction treatment in Rancho Mirage, California." />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" />
+<style>
+  /* ===== First Light × Desert Calm — real assets ===== */
+  :root {
+    --bg:#0F1319; --bg-2:#0B0E13; --surface:#171F29; --surface-2:#1E2833;
+    --hair:rgba(230,184,122,.16); --hair-soft:rgba(240,234,222,.09);
+    --text:#F1EBDF; --text-soft:#C9C0B0; --text-mute:#8B8474;
+    --gold:#E6B87A; --gold-deep:#D2924E; --gold-ink:#F4D6A6;
+    --teal:#7FA6B8;
+    --r-sm:8px; --r-md:14px; --r-btn:10px; --r-lg:24px; --r-pill:999px;
+    --ease:cubic-bezier(.22,.61,.36,1);
+    --serif:"Fraunces","Iowan Old Style",Georgia,serif;
+    --sans:"Hanken Grotesk",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+    --maxw:1180px;
+    --shadow:0 24px 60px -24px rgba(0,0,0,.7);
+    --shadow-gold:0 18px 46px -20px rgba(214,146,78,.42);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.07;letter-spacing:-.01em;margin:0;text-wrap:balance;}
+  p{margin:0;} a{color:inherit;text-decoration:none;} img{max-width:100%;display:block;}
+  .wrap{width:min(100% - 2.4rem,var(--maxw));margin-inline:auto;}
+  .eyebrow{font-family:var(--sans);font-weight:600;font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:inline-flex;align-items:center;gap:.6rem;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+
+  /* buttons — squared per audit */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;padding:.9rem 1.5rem;border-radius:var(--r-btn);font-family:var(--sans);font-weight:600;font-size:.96rem;border:1px solid transparent;cursor:pointer;white-space:nowrap;transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s var(--ease),border-color .3s var(--ease);}
+  .btn-primary{background:linear-gradient(180deg,var(--gold-ink),var(--gold-deep));color:#2A1A08;box-shadow:var(--shadow-gold);}
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-ghost{background:rgba(241,235,223,.05);color:var(--text);border-color:var(--hair);}
+  .btn-ghost:hover{border-color:var(--gold);transform:translateY(-2px);}
+  .btn svg{width:18px;height:18px;}
+  :focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:6px;}
+
+  /* nav */
+  .nav{position:fixed;inset:0 0 auto 0;z-index:60;transition:background .4s var(--ease),border-color .4s;border-bottom:1px solid transparent;}
+  .nav.scrolled{background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:saturate(1.5) blur(14px);border-bottom-color:var(--hair-soft);}
+  .nav-inner{display:flex;align-items:center;gap:1.4rem;min-height:76px;}
+  .brand{display:inline-flex;align-items:center;}
+  .brand img{height:42px;width:auto;}
+  .nav-links{display:flex;gap:1.7rem;margin-inline:auto;}
+  .nav-links a{font-weight:500;font-size:.95rem;color:var(--text-soft);position:relative;padding:.3rem 0;}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:-2px;height:1.5px;width:0;background:var(--gold);transition:width .3s var(--ease);}
+  .nav-links a:hover{color:var(--text);} .nav-links a:hover::after{width:100%;}
+  .nav-cta{display:flex;align-items:center;gap:.7rem;}
+  .nav-phone{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;font-size:.95rem;background:linear-gradient(180deg,var(--gold-ink),var(--gold-deep));color:#2A1A08;padding:.6rem 1rem;border-radius:var(--r-btn);}
+  .nav-phone svg{width:16px;height:16px;}
+  .nav-toggle{display:none;background:none;border:1px solid var(--hair);border-radius:var(--r-sm);width:44px;height:44px;color:var(--text);cursor:pointer;}
+
+  /* hero with real photo */
+  .hero{position:relative;min-height:100svh;display:flex;align-items:center;padding:7rem 0 4rem;overflow:hidden;}
+  .hero-photo{position:absolute;inset:0;z-index:0;background:url("images/photo-160.jpg") center/cover no-repeat;transform:scale(1.05);}
+  .hero-scrim{position:absolute;inset:0;z-index:1;background:
+     linear-gradient(90deg,rgba(11,14,19,.94) 0%,rgba(11,14,19,.78) 42%,rgba(11,14,19,.28) 100%),
+     radial-gradient(90% 60% at 50% 120%,rgba(240,192,121,.4),transparent 60%);}
+  .hero-inner{position:relative;z-index:3;max-width:660px;}
+  .hero h1{font-size:clamp(2.6rem,6vw,4.4rem);}
+  .hero h1 em{font-style:italic;color:var(--gold-ink);}
+  .hero .lead{margin-top:1.4rem;font-size:clamp(1.05rem,1.7vw,1.28rem);color:var(--text-soft);max-width:34em;}
+  .hero-actions{margin-top:2.2rem;display:flex;flex-wrap:wrap;gap:.85rem;}
+  .hero-trust{margin-top:2.4rem;display:flex;flex-wrap:wrap;gap:.5rem 1.3rem;font-size:.82rem;color:var(--text-mute);}
+  .hero-trust span{display:inline-flex;align-items:center;gap:.45rem;}
+  .hero-trust svg{width:15px;height:15px;color:var(--gold);flex:none;}
+
+  section{position:relative;}
+  .band{padding:6rem 0;}
+  .section-head{max-width:640px;margin-bottom:3rem;}
+  .section-head h2{font-size:clamp(2rem,4vw,2.9rem);margin-top:1.1rem;}
+  .section-head p{margin-top:1rem;color:var(--text-soft);font-size:1.06rem;}
+
+  /* accreditation bar — real badges */
+  .accbar{background:var(--bg-2);border-block:1px solid var(--hair-soft);}
+  .accbar .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.4rem 2rem;padding:1.6rem 0;}
+  .acc{display:inline-flex;align-items:center;gap:.75rem;color:var(--text-soft);font-weight:500;font-size:.9rem;}
+  .acc img{height:44px;width:auto;background:#fff;border-radius:8px;padding:5px;}
+  .acc small{display:block;color:var(--text-mute);font-size:.75rem;font-weight:400;}
+  .acc .chip{width:40px;height:40px;border-radius:9px;display:grid;place-items:center;background:rgba(230,184,122,.12);border:1px solid var(--hair);color:var(--gold);}
+  .acc .chip svg{width:20px;height:20px;}
+
+  /* empathy */
+  .empathy{background:linear-gradient(180deg,var(--bg),var(--bg-2));}
+  .empathy .big{font-family:var(--serif);font-size:clamp(1.8rem,3.6vw,2.8rem);line-height:1.16;max-width:20ch;margin-top:1rem;}
+  .empathy .big .soft{color:var(--text-mute);}
+  .empathy .cols{margin-top:2.6rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;}
+  .empathy .cols p{color:var(--text-soft);font-size:.96rem;padding-top:1.1rem;border-top:1px solid var(--hair);}
+  .empathy .cols strong{display:block;font-family:var(--serif);font-weight:500;font-size:1.12rem;color:var(--text);margin-bottom:.35rem;}
+
+  /* programs */
+  .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:1.1rem;}
+  .card{position:relative;padding:2rem;border-radius:var(--r-lg);background:linear-gradient(180deg,var(--surface),var(--surface-2));border:1px solid var(--hair);transition:transform .4s var(--ease),box-shadow .4s var(--ease);}
+  .card:hover{transform:translateY(-6px);box-shadow:var(--shadow);}
+  .card .ico{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;margin-bottom:1.2rem;background:rgba(230,184,122,.12);border:1px solid var(--hair);color:var(--gold);}
+  .card .ico svg{width:24px;height:24px;}
+  .card h3{font-size:1.4rem;margin-bottom:.5rem;}
+  .card p{color:var(--text-soft);font-size:.97rem;}
+
+  /* gallery — real photos */
+  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem;}
+  .gallery figure{margin:0;border-radius:var(--r-md);overflow:hidden;border:1px solid var(--hair);aspect-ratio:4/3;}
+  .gallery img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease);}
+  .gallery figure:hover img{transform:scale(1.06);}
+
+  /* experience split with real photo */
+  .split{display:grid;grid-template-columns:.95fr 1.05fr;gap:3rem;align-items:center;}
+  .split-art{border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--hair);box-shadow:var(--shadow);aspect-ratio:4/5;}
+  .split-art img{width:100%;height:100%;object-fit:cover;}
+  .checklist{list-style:none;padding:0;margin:1.6rem 0 0;display:grid;gap:1.05rem;}
+  .checklist li{display:grid;grid-template-columns:auto 1fr;gap:.85rem;}
+  .checklist .tick{width:24px;height:24px;border-radius:50%;background:rgba(230,184,122,.12);border:1px solid var(--hair);color:var(--gold);display:grid;place-items:center;margin-top:2px;}
+  .checklist .tick svg{width:13px;height:13px;}
+  .checklist strong{display:block;font-family:var(--serif);font-weight:500;font-size:1.08rem;margin-bottom:.2rem;}
+  .checklist span.d{color:var(--text-soft);font-size:.94rem;}
+
+  /* insurance panel */
+  .panel{border-radius:var(--r-lg);padding:clamp(2.2rem,5vw,4rem);text-align:center;background:radial-gradient(120% 130% at 50% 0%,rgba(214,146,78,.2),transparent 60%),linear-gradient(180deg,var(--surface),var(--bg-2));border:1px solid var(--hair);}
+  .panel h2{font-size:clamp(2rem,4.4vw,3.2rem);}
+  .panel p{margin:1.1rem auto 0;max-width:46ch;color:var(--text-soft);font-size:1.06rem;}
+  .panel .hero-actions{justify-content:center;}
+
+  /* footer */
+  footer{border-top:1px solid var(--hair-soft);background:var(--bg-2);padding:3.5rem 0 2.2rem;}
+  .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:2.4rem;}
+  .foot-grid img{height:40px;width:auto;margin-bottom:1rem;}
+  .foot-grid h4{font-family:var(--sans);font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-mute);margin:0 0 1rem;}
+  .foot-grid a,.foot-grid p{color:var(--text-soft);font-size:.9rem;display:block;margin-bottom:.5rem;}
+  .foot-grid a:hover{color:var(--gold);}
+  .disclaimer{background:rgba(214,146,78,.07);border:1px solid var(--hair);border-radius:var(--r-md);padding:1rem 1.2rem;font-size:.82rem;color:var(--text-soft);margin-bottom:2.4rem;}
+  .disclaimer strong{color:var(--gold-ink);}
+  .foot-bottom{margin-top:2.6rem;padding-top:1.6rem;border-top:1px solid var(--hair-soft);font-size:.8rem;color:var(--text-mute);display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;}
+
+  /* sticky mobile call bar */
+  .callbar{display:none;}
+  .preview-flag{position:fixed;top:0;left:0;right:0;z-index:80;background:var(--gold-deep);color:#2A1A08;font-family:var(--sans);font-weight:700;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;text-align:center;padding:.3rem;}
+  .nav{top:1.55rem;}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+  .reveal.in{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important;}}
+
+  @media (max-width:860px){
+    .empathy .cols,.cards,.gallery{grid-template-columns:1fr;}
+    .gallery{grid-template-columns:1fr 1fr;}
+    .split{grid-template-columns:1fr;gap:2rem;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+    .nav-links{display:none;} .nav-toggle{display:grid;place-items:center;}
+    .nav-links.open{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;margin:0;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(14px);padding:.5rem 1.2rem 1.2rem;border-bottom:1px solid var(--hair);}
+    .nav-links.open a{padding:.9rem 0;border-top:1px solid var(--hair-soft);}
+  }
+  @media (max-width:768px){
+    body{padding-bottom:4.4rem;}
+    .nav-phone .num{display:none;}
+    .callbar{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;position:fixed;left:0;right:0;bottom:0;z-index:70;padding:.55rem .75rem calc(.55rem + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:saturate(1.4) blur(10px);border-top:1px solid var(--hair);}
+    .callbar a{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;min-height:3rem;font-weight:700;font-size:.95rem;border-radius:var(--r-btn);border:1px solid transparent;}
+    .callbar .cb-call{background:linear-gradient(180deg,var(--gold-ink),var(--gold-deep));color:#2A1A08;}
+    .callbar .cb-verify{background:var(--surface);color:var(--text);border-color:var(--hair);}
+    .callbar svg{width:17px;height:17px;}
+  }
+  @media (max-width:520px){.empathy .cols,.gallery{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="preview-flag">Design preview · not the live site</div>
+
+<nav class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand" aria-label="New Beginnings Recovery — home"><img src="images/logo-primary-light.svg" alt="New Beginnings Recovery" /></a>
+    <div class="nav-links" id="navlinks">
+      <a href="#programs">Programs</a>
+      <a href="#care">The Experience</a>
+      <a href="#inside">A Look Inside</a>
+      <a href="#insurance">Insurance</a>
+    </div>
+    <div class="nav-cta">
+      <a class="nav-phone" href="tel:+17607623605"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 4h4l2 5-3 2a12 12 0 006 6l2-3 5 2v4a2 2 0 01-2 2A17 17 0 013 6a2 2 0 012-2z"/></svg><span class="num">(760) 762-3605</span></a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-photo" aria-hidden="true"></div>
+  <div class="hero-scrim" aria-hidden="true"></div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow reveal">Private detox &amp; residential care · Rancho Mirage</span>
+    <h1 class="reveal">A calmer place<br>to <em>begin again.</em></h1>
+    <p class="lead reveal">Physician-led medical detox and residential treatment in a private Coachella Valley estate. Around-the-clock care, complete discretion, and a team that answers the moment you call.</p>
+    <div class="hero-actions reveal">
+      <a class="btn btn-primary" href="tel:+17607623605"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 4h4l2 5-3 2a12 12 0 006 6l2-3 5 2v4a2 2 0 01-2 2A17 17 0 013 6a2 2 0 012-2z"/></svg>Call 24/7 — (760) 762-3605</a>
+      <a class="btn btn-ghost" href="#insurance">Verify your insurance</a>
+    </div>
+    <div class="hero-trust reveal">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>DHCS licensed</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>LegitScript certified</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>Confidential — HIPAA &amp; 42 CFR Part 2</span>
+    </div>
+  </div>
+</header>
+
+<div class="accbar">
+  <div class="wrap">
+    <div class="acc"><img src="images/badges/dhcs-logo.png" alt="California DHCS" /><div>State of California — DHCS<small>License #330232AP · Exp. 07/31/2027</small></div></div>
+    <div class="acc"><img src="images/badges/legitscript-seal-example.png" alt="LegitScript Certified" /><div>LegitScript<small>Certified treatment provider</small></div></div>
+    <div class="acc"><span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7z"/><path d="M9 12l2 2 4-4"/></svg></span><div>Confidential care<small>HIPAA &amp; 42 CFR Part 2</small></div></div>
+    <div class="acc"><span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span><div>Admissions 24/7<small>Most major PPO insurance</small></div></div>
+  </div>
+</div>
+
+<section class="band empathy">
+  <div class="wrap">
+    <p class="eyebrow reveal">If today is the day</p>
+    <p class="big reveal">You don't have to figure this out alone. <span class="soft">The hardest part is the phone call. We'll take it from there.</span></p>
+    <div class="cols">
+      <p class="reveal"><strong>It moves fast.</strong> Withdrawal from alcohol, benzodiazepines, or opioids can turn dangerous within hours. Medical supervision makes it safe.</p>
+      <p class="reveal"><strong>It's private.</strong> A quiet residence, not a hospital ward. What you tell us is protected by HIPAA and federal Part 2 confidentiality.</p>
+      <p class="reveal"><strong>It starts today.</strong> Admissions are open around the clock. Most people who call in the morning are settled in by evening.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="programs">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow reveal">How we help</span>
+      <h2 class="reveal">Safe detox. Real treatment.<br>One private place.</h2>
+      <p class="reveal">Every stay is built around one person: medically, clinically, and personally. Care stays with you from the first night through the transition home.</p>
+    </div>
+    <div class="cards">
+      <article class="card reveal"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M7 12h10" stroke-linecap="round"/></svg></span><h3>Medical Detox</h3><p>24/7 physician and nursing oversight, comfort medications, and continuous monitoring so withdrawal is managed safely, not endured.</p></article>
+      <article class="card reveal"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg></span><h3>Residential Rehab</h3><p>A structured, unhurried stay in a private estate. Individual therapy, groups, and whole-person care that treats the reasons underneath the use.</p></article>
+      <article class="card reveal"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21c-5-3-9-6-9-11a5 5 0 019-3 5 5 0 019 3c0 5-4 8-9 11z"/></svg></span><h3>Dual Diagnosis</h3><p>Addiction rarely travels alone. We treat anxiety, depression, and trauma alongside substance use, because lasting recovery needs both.</p></article>
+      <article class="card reveal"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="10" r="2.4"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/></svg></span><h3>Family Support</h3><p>Addiction affects the whole family. Guided sessions and clear, HIPAA-appropriate updates help the people who love you heal too.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="care" style="background:linear-gradient(180deg,var(--bg),var(--bg-2))">
+  <div class="wrap split">
+    <div class="split-art reveal"><img src="images/photo-171.jpg" alt="A calm interior space at New Beginnings Recovery in Rancho Mirage" loading="lazy" /></div>
+    <div>
+      <span class="eyebrow reveal">What care feels like here</span>
+      <h2 class="reveal" style="font-size:clamp(1.9rem,3.8vw,2.7rem);margin-top:1rem">Recovery in a place that feels like rest, not a hospital.</h2>
+      <ul class="checklist">
+        <li class="reveal"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></span><div><strong>Around-the-clock medical team</strong><span class="d">Doctors and nurses on site 24/7, so the safest option is never far away.</span></div></li>
+        <li class="reveal"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></span><div><strong>A private, low-census setting</strong><span class="d">A quiet, comfortable residence in Rancho Mirage. Genuinely discreet.</span></div></li>
+        <li class="reveal"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></span><div><strong>One plan, built for you</strong><span class="d">Therapy, psychiatry, and whole-person care (nutrition, movement, mindfulness) in one coordinated plan.</span></div></li>
+        <li class="reveal"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></span><div><strong>A real plan for after</strong><span class="d">You leave with a concrete next step, not a discharge paper and a handshake.</span></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="inside">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow reveal">A look inside</span>
+      <h2 class="reveal">The place where healing happens.</h2>
+      <p class="reveal">Our Rancho Mirage property is intentionally unlike a hospital — calm, private, and comfortable.</p>
+    </div>
+    <div class="gallery reveal">
+      <figure><img src="images/photo-159.jpg" alt="New Beginnings Recovery residence, Rancho Mirage" loading="lazy" /></figure>
+      <figure><img src="images/photo-165.jpg" alt="Interior common space at New Beginnings Recovery" loading="lazy" /></figure>
+      <figure><img src="images/photo-162.jpg" alt="Comfortable resident room at New Beginnings Recovery" loading="lazy" /></figure>
+      <figure><img src="images/photo-176.jpg" alt="Wellness space at New Beginnings Recovery" loading="lazy" /></figure>
+      <figure><img src="images/photo-148.jpg" alt="Calm setting at New Beginnings Recovery" loading="lazy" /></figure>
+      <figure><img src="images/photo-178.jpg" alt="Desert grounds at New Beginnings Recovery, Rancho Mirage" loading="lazy" /></figure>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="insurance">
+  <div class="wrap">
+    <div class="panel reveal">
+      <span class="eyebrow" style="justify-content:center">Paying for care</span>
+      <h2 style="margin-top:1rem">Most PPO insurance is accepted.</h2>
+      <p>Send your details through a secure, confidential check and we'll verify your benefits — usually the same day. No obligation, and nothing shared with advertisers.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="tel:+17607623605">Verify my insurance</a>
+        <a class="btn btn-ghost" href="tel:+17607623605">Or call (760) 762-3605</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="disclaimer reveal"><strong>In an emergency, call 911.</strong> If you or someone else is in crisis, call or text <strong>988</strong> (Suicide &amp; Crisis Lifeline), available 24/7. This website is not a substitute for emergency medical care.</div>
+    <div class="foot-grid">
+      <div>
+        <img src="images/logo-primary-light.svg" alt="New Beginnings Recovery" />
+        <p>34620 Via Josefina<br>Rancho Mirage, CA 92270</p>
+        <p><a href="tel:+17607623605">(760) 762-3605</a> · available 24/7</p>
+        <p style="color:var(--text-mute)">DHCS License #330232AP · Exp. 07/31/2027</p>
+      </div>
+      <div><h4>Programs</h4><a href="#programs">Medical Detox</a><a href="#programs">Residential Rehab</a><a href="#programs">Dual Diagnosis</a><a href="#care">Family Support</a></div>
+      <div><h4>Preview</h4><a href="design-audit.html">Design audit</a><a href="first-light.html">First Light concept</a><a href="https://williamparrish-michael.github.io/newbeginnings-recovery/">Full rebuild (Astro)</a></div>
+    </div>
+    <div class="foot-bottom"><span>© 2026 New Beginnings Recovery · design preview</span><span>Confidential care · HIPAA &amp; 42 CFR Part 2</span></div>
+  </div>
+</footer>
+
+<nav class="callbar" aria-label="Quick contact">
+  <a class="cb-call" href="tel:+17607623605" aria-label="Call New Beginnings Recovery 24/7"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 4h4l2 5-3 2a12 12 0 006 6l2-3 5 2v4a2 2 0 01-2 2A17 17 0 013 6a2 2 0 012-2z"/></svg>Call 24/7</a>
+  <a class="cb-verify" href="#insurance"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7z"/><path d="M9 12l2 2 4-4"/></svg>Verify insurance</a>
+</nav>
+
+<script>
+  const nav=document.getElementById('nav');
+  const onScroll=()=>nav.classList.toggle('scrolled',scrollY>24); onScroll(); addEventListener('scroll',onScroll,{passive:true});
+  const t=document.getElementById('navToggle'),l=document.getElementById('navlinks');
+  t.addEventListener('click',()=>{const o=l.classList.toggle('open');t.setAttribute('aria-expanded',String(o));});
+  l.addEventListener('click',e=>{if(e.target.tagName==='A'){l.classList.remove('open');t.setAttribute('aria-expanded','false');}});
+  const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if(!reduce&&'IntersectionObserver'in window){
+    const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  }else{document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));}
+</script>
+</body>
+</html>
